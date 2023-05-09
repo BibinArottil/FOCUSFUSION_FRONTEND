@@ -111,7 +111,7 @@ function Category() {
 
   return (
     <div className="h-full w-full">
-      <div className="flex flex-col px-20 py-5">
+      <div className="flex flex-col px-20 mt-5">
         <h1 className="text-3xl font-semibold">Category List</h1>
         <button
           className="self-start my-5 bg-slate-400 w-32 h-10 shadow-slate-800 shadow-sm rounded-full"

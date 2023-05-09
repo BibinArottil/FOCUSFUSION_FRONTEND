@@ -4,8 +4,10 @@ import Table from "../../components/Ui/Table";
 import axios from "../../instance/axios";
 import { useSelector } from "react-redux";
 import BookingDetails from "../../components/Photographer/BookingDetails";
+import { useNavigate } from "react-router-dom";
 
 function Bookings() {
+  const navigate = useNavigate();
   const [value, setValue] = useState([]);
   const [modal, setModal] = useState(false);
   const [details, setDetails] = useState(null);
@@ -31,8 +33,6 @@ function Bookings() {
   const handleView = async (val) => {
     setDetails(val);
   };
-
-  // console.log(details);
 
   const columns = [
     {
@@ -93,7 +93,15 @@ function Bookings() {
 
   return (
     <div className="mx-5 mt-20">
-        <Table data={data} columns={columns} />
+      <div className="mb-5">
+        <button
+          onClick={() => navigate("/photographer/bookingHistory")}
+          className="bg-gray-500 text-white px-5 py-2 rounded"
+        >
+          View history
+        </button>
+      </div>
+      <Table data={data} columns={columns} />
       <BookingDetails
         visible={modal}
         onClose={handleOnClose}

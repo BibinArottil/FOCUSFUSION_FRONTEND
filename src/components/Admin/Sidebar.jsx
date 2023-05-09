@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
+import {TbReportSearch} from "react-icons/tb"
 import { MdAddAPhoto } from "react-icons/md";
 import { HiUsers } from "react-icons/hi";
 import { FaTicketAlt } from "react-icons/fa";
@@ -22,6 +23,7 @@ const AdminNavbar = () => {
     { name: "Category", link: "/admin/category", icon: BiCategory },
     // { name: "Review", link: "", icon: MdReviews },
     { name: "Works", link: "/admin/works", icon: BsPersonWorkspace },
+    { name: "Sales", link: "/admin/sales", icon: TbReportSearch },
     // { name: "Logout", link: "/admin/logout", icon: BiLogOut },
   ];
 

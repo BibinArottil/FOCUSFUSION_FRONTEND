@@ -48,6 +48,11 @@ function BookingDetails({ visible, onClose, reload, details }) {
         </div>
         <div className="ml-5 mt-5 text-lg">
           <p>
+            Time - <span className="font-bold">{details.time}</span>
+          </p>
+        </div>
+        <div className="ml-5 mt-5 text-lg">
+          <p>
             Location - <span className="font-bold">{details.location}</span>
           </p>
         </div>

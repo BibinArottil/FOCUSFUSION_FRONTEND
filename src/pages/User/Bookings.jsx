@@ -62,7 +62,7 @@ function Bookings() {
                 handleView(row.val);
                 setModal(true);
               }}
-              className="bg-cyan-500 sm:px-2 text-white sm:py-1 rounded"
+              className="bg-cyan-500 sm:px-2 text-white sm:py-1 rounded mr-10"
             >
               View more
             </button>
@@ -86,7 +86,7 @@ function Bookings() {
       });
 
   return (
-    <div className="mx-5 mt-20">
+    <div className="mx-20 mt-20">
       <div className="mb-5">
         <button onClick={()=>navigate("/bookingHistory")} className="bg-gray-500 text-white px-5 py-2 rounded">View history</button>
       </div>

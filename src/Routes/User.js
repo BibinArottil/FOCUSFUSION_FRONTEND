@@ -12,7 +12,7 @@ import PhotographerView from "../pages/User/PhotographerView";
 import BookAShoot from "../pages/User/BookShoot";
 import Bookings from "../pages/User/Bookings";
 import BookingHistory from "../pages/User/BookingHistory";
-import PaymentSuccess from "../pages/User/PaymentSuccess";
+import PaymentSuccess from "../components/Ui/PaymentSuccessPage";
 import Layout from "../layout/UserLayout";
 import Protect from "../protectorRouter/UserProtect";
 
@@ -20,7 +20,7 @@ function User() {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<UserLogin role={"user"} />} />
+        <Route path="/login" element={<UserLogin />} />
         <Route path="/signup" element={<UserSignUp />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
@@ -34,7 +34,7 @@ function User() {
             <Route path="/bookShoot" element={<BookAShoot />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/bookingHistory" element={<BookingHistory />} />
-            <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+            <Route path="/paymentSuccess" element={<PaymentSuccess role={"user"}/>} />
           </Route>
         </Route>
       </Routes>

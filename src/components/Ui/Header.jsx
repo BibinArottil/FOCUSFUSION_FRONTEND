@@ -61,7 +61,7 @@ function LandingHeader() {
       >
         {userProfile || photographerProfile ? (
           userProfile ? (
-            <div className="flex justify-center sm:ml-52">
+            <div className="flex justify-center sm:ml-56">
               <Dropdown label={userProfile.name} inline={true}>
                 <Link to="/">
                   <Dropdown.Item className="bg-white text-black hover:bg-gray-700">
@@ -88,6 +88,11 @@ function LandingHeader() {
                     PHOTOGRAPHERS
                   </Dropdown.Item>
                 </Link>
+                <Link to="/review">
+                  <Dropdown.Item className="bg-white text-black hover:bg-gray-700">
+                    REVIEW
+                  </Dropdown.Item>
+                </Link>
                 <Dropdown.Item
                   className="bg-white text-black hover:bg-gray-700"
                   onClick={userLogout}
@@ -98,6 +103,9 @@ function LandingHeader() {
             </div>
           ) : (
             <div className="flex sm:justify-end justify-center">
+              <div className="-mt-3">
+              <img className="bg-zinc-500 w-10 h-10 rounded-full mx-2 -pt-10" src={photographerDetails.logo?photographerDetails.logo:"https://st4.depositphotos.com/14953852/22772/v/1600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg"} alt="logo" />
+              </div>
               <Dropdown label={photographerDetails.companyName} inline={true}>
                 <Link to="/">
                   <Dropdown.Item className="bg-white text-black hover:bg-gray-700">
@@ -123,6 +131,11 @@ function LandingHeader() {
                 <Link to="/photographer/gallery">
                   <Dropdown.Item className="bg-white text-black hover:bg-gray-700">
                     GALLERY
+                  </Dropdown.Item>
+                </Link>
+                <Link to="/photographer/reviews">
+                  <Dropdown.Item className="bg-white text-black hover:bg-gray-700">
+                    REVIEWS
                   </Dropdown.Item>
                 </Link>
                 <Dropdown.Item

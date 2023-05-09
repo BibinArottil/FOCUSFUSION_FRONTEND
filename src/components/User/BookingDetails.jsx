@@ -18,7 +18,7 @@ function BookingDetails({ visible, onClose, reload, details }) {
       reload()
     })
   }
-
+  
   if (!visible) return null;
 
   return (
@@ -35,36 +35,43 @@ function BookingDetails({ visible, onClose, reload, details }) {
         <div className="flex justify-between mx-5 text-lg">
           <p>
             Location
-            {/* <span className="font-bold">{details.location}</span> */}
           </p>
           <p>{details.location}</p>
         </div>
         <div className="flex justify-between mx-5 mt-5 text-lg">
           <p>
             Advance paid
-            {/* <span className="font-bold">{details.advance}</span> */}
           </p>
           <p>{details.advance}</p>
         </div>
+        {
+          details.totalAmount?
         <div className="flex justify-between mx-5 mt-5 text-lg">
           <p>
             Total
-            {/* <span className="font-bold">{details.totalAmount}</span> */}
           </p>
           <p>{details.totalAmount}</p>
-        </div>
+        </div>:null
+        }
+        {
+          details.balance?
         <div className="flex justify-between mx-5 mt-5 text-lg">
           <p>
             Balance
-            {/* <span className="font-bold">{details.balance}</span> */}
           </p>
           <p>{details.balance}</p>
-        </div>
-        <div className="text-center mt-2 mx-14">
-          {details.balance ? (
-            true ? (
-              <PayPalScriptProvider
-                options={{ "client-id": process.env.REACT_APP_CLIENT_ID }}
+        </div>:null
+
+        }
+        <div className="text-center mt-2 mx-14"> 
+
+         {details.balance ? 
+          details.success ? 
+            <h1 className="font-bold text-green-500 m-5">
+            We are waiting for your next event.
+          </h1>:
+              <PayPalScriptProvider 
+                options={{ "client-id":"AZt9846IPXQJxVu7QBDlcAzLM1zM1LtY5SJahEuoXICFiLcRn3su71bcJIb0Ob8mObuOt6sL5bWHnt-n" }}
               >
                 <PayPalButtons
                   style={{
@@ -93,21 +100,30 @@ function BookingDetails({ visible, onClose, reload, details }) {
                   }}
                 />
               </PayPalScriptProvider>
-            ) : 
-            (
-              <h1 className="font-bold text-green-500 m-5">
-                We are waiting for your next event.
-              </h1>
-            )
-          ) : (
-            <h1 className="mb-5 text-gray-500 font-semibold">Your booking is pending please wait for the confirmation</h1>
-          )}
+             
+            
+
+            
+         : ( details.status!=="Cancelled" ?
+
+          
+           <h1 className="mb-5 text-gray-500 font-semibold">Your booking is pending please wait for the confirmation</h1>
+           :null
+         )
+        }
+        {
+         !details.success && details.status!=="Cancelled"?
           <button
             className="px-32 py-2 border hover:bg-red-500 mb-5 font-bold  hover:text-white rounded"
             onClick={() => alert(handleCancel())}
           >
             CANCEL
-          </button>
+          </button>:( details.success?
+            null:
+            <h1 className="font-bold text-red-600 mb-5">CANCELLED</h1>
+          )
+
+        }
         </div>
       </div>
     </div>

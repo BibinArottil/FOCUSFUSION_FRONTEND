@@ -42,12 +42,11 @@ function Profile() {
             })
         }
     }
-    console.log(value.name)
     
   return (
     <div className="w-100 h-96 rounded-lg mx-5 m-auto sm:mt-32 bg-gray-300">
     <div className="flex justify-evenly flex-wrap items-center mt-10 font-Lora text-lg">
-        <ProfileCard value={value} pic={fetchData}/>
+        <ProfileCard value={value} pic={fetchData} />
       <div>
         <h1>Name</h1>
         <input

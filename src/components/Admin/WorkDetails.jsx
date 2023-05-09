@@ -1,9 +1,19 @@
-import React from "react";
+import { toast } from "react-toastify";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import axios from "../../instance/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function WorkDetails({ visible, onClose, details }) {
+  const navigate = useNavigate();
 
-  console.log(details);
-  
+  const amount = (details?.totalAmount * 80) / 100;
+
+  const handlePaymentSuccess = async () => {
+    await axios.patch("/admin/works/" + details._id, { amount }).then((res) => {
+      navigate("/admin/paymentSuccess");
+    });
+  };
+
   if (!visible) return null;
 
   return (
@@ -18,66 +28,86 @@ export default function WorkDetails({ visible, onClose, details }) {
           </button>
         </div>
         <div className="flex justify-between mx-5 text-lg">
-          <p>
-            Photographer Name 
-            {/* <span className="font-bold">{details.location}</span> */}
-          </p>
+          <p>Photographer Name</p>
           <p>{details.company.name}</p>
         </div>
         <div className="flex justify-between mx-5 mt-5 text-lg">
-          <p>
-            Email
-            {/* <span className="font-bold">{details.advance}</span> */}
-          </p>
-          <p>
-          {details.company.email}
-          </p>
+          <p>Email</p>
+          <p>{details.company.email}</p>
         </div>
         <div className="flex justify-between mx-5 mt-5 text-lg">
-          <p>
-            User Name
-             {/* <span className="font-bold">{details.totalAmount}</span> */}
-          </p>
-          <p>
-          {details.user.name}
-          </p>
+          <p>User Name</p>
+          <p>{details.user.name}</p>
         </div>
         <div className="flex justify-between mx-5 mt-5 text-lg">
-          <p>
-            Mobile No:
-            {/* <span className="font-bold">{details.balance}</span> */}
-          </p>
-          <p>
-          {details.user.mobile}
-          </p>
+          <p>Mobile No:</p>
+          <p>{details.user.mobile}</p>
         </div>
         <div className="flex justify-between mx-5 mt-5 text-lg">
-          <p>
-            Advance Paid
-            {/* <span className="font-bold">{details.balance}</span> */}
-          </p>
-          <p>
-          {details.advance}
+          <p>Advance Paid</p>
+          <p>{details.advance}</p>
+        </div>
+        {details.success ? (
+          <div className="flex justify-between mx-5 mt-5 text-lg">
+            <p>Balance Paid</p>
+            <p>{details.balance}</p>
+          </div>
+        ) : null}
+        {details.totalAmount ? (
+          <div className="flex justify-between mx-5 mt-5 text-lg">
+            <p>Total</p>
+            <p>{details.totalAmount}</p>
+          </div>
+        ) : null}
+        <div className="flex justify-between mx-5 mt-5 text-lg">
+          <p>Payment Status</p>
+          <p
+            className={`font-bold ${
+              details.success ? "text-green-500" : "text-yellow-400"
+            }`}
+          >
+            {details.success ? "Payment success" : "Payment Pending"}
           </p>
         </div>
-        <div className="flex justify-between mx-5 mt-5 text-lg">
-          <p>
-            Total
-            {/* <span className="font-bold">{details.balance}</span> */}
-          </p>
-          <p>
-          {details.totalAmount}
-          </p>
-        </div>
-        <div className="flex justify-between mx-5 mt-5 text-lg">
-          <p>
-            Payment Status
-            {/* <span className="font-bold">{details.balance}</span> */}
-          </p>
-          {/* <p className={`${details.success?"bg-green-500":"text-yellow-400"}font-bold`}> */}
-          <p className={`font-bold ${details.success?"text-green-500":"text-yellow-400"}`}>
-          {details.success?"Payment success":"Payment Pending"}
-          </p>
+        {details.success ? (
+          <div className="flex justify-between mx-5 mt-5 text-lg">
+            <p>Payment of Photographer</p>
+            <p>{amount}</p>
+          </div>
+        ) : null}
+        <div className="text-center mt-5 mx-14">
+          {details.success ? (
+            <PayPalScriptProvider
+              options={{ "client-id":"AZt9846IPXQJxVu7QBDlcAzLM1zM1LtY5SJahEuoXICFiLcRn3su71bcJIb0Ob8mObuOt6sL5bWHnt-n" }}
+            >
+              <PayPalButtons
+                style={{
+                  layout: "vertical",
+                  color: "gold",
+                  shape: "rect",
+                  label: "pay",
+                  zIndex: 2,
+                  height: 40,
+                }}
+                className="w-[350px] px-3 max-h-56 bg-white overflow-y-scroll"
+                createOrder={(data, actions) => {
+                  return actions.order.create({
+                    purchase_units: [{ amount: { value: amount } }],
+                  });
+                }}
+                onApprove={async (data, actions) => {
+                  await actions.order.capture();
+                  handlePaymentSuccess();
+                }}
+                onCancel={() => {
+                  toast.error("payment cancelled");
+                }}
+                onError={() => {
+                  toast.error("payment failed");
+                }}
+              />
+            </PayPalScriptProvider>
+          ) : null}
         </div>
       </div>
     </div>

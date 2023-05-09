@@ -17,7 +17,7 @@ function Chat() {
   const scrollRef = useRef()
 
   useEffect(()=>{
-    socket.current = io("ws://localhost:8000")
+    socket.current = io("ws://focusfusion-api.bibin.tech")
     socket.current.on("getMessage",data=>{
       setArrivalMessage({
         sender:data.senderId,
@@ -90,8 +90,6 @@ const handleSubmit = async(e) =>{
   }
 }
 
-// const fil = chat.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()))
-// console.log(fil);
 useEffect(()=>{
   scrollRef.current?.scrollIntoView({behavior:"smooth"})
 },[messages])

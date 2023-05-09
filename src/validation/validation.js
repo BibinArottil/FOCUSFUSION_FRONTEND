@@ -118,6 +118,8 @@ export const bookingValidationSchema = Yup.object().shape({
     .required("Advance amount is required"),
   date: Yup.string()
     .required("Date is required"),
+  time: Yup.string()
+    .required("Time is required"),
   location: Yup.string()
     .required("Location is required"),
   company: Yup.string()

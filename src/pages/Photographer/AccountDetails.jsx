@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "../../instance/axios";
+import Logo from "../../components/Admin/Logo";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import {toast} from "react-toastify"
@@ -37,7 +38,8 @@ function AccountDetails() {
 
   return (
     <div className="w-100 h-96 rounded-lg mx-5 m-auto sm:mt-32 bg-gray-300">
-      <div className="flex justify-around flex-wrap items-center pt-20 font-Lora text-lg">
+      <div className="flex justify-around flex-wrap items-center mt-12 font-Lora text-lg">
+        <Logo value={value} logo={fetchData}/>
         <div>
           <h1>Company Name</h1>
           <input
@@ -102,7 +104,7 @@ function AccountDetails() {
           />
         </div>
       </div>
-      <div className="flex justify-center font-Lora items-center mt-14">
+      <div className="flex justify-center font-Lora items-center">
         <button onClick={handleUpdate} className=" px-5  py-2 bg-teal-500 shadow-lg shadow-teal-500/60 hover:shadow-teal-500/40 text-white font-semibold rounded-lg">
           Update
         </button>

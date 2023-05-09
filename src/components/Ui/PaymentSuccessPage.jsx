@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function PaymentSuccess() {
+function PaymentSuccess({role}) {
   const navigate = useNavigate()
   return (
     <div className="bg-gray-100 m-auto">
@@ -16,10 +16,7 @@ function PaymentSuccess() {
             <p className="text-gray-600 my-2">Thank you for completing your secure online payment.</p>
             <p> Have a great day!  </p>
             <div className="-10 text-center">
-                {/* <Link to="/bookAshoot">
-                    GO BACK 
-                </Link> */}
-            <button onClick={()=>navigate("/")} className="mt-14 border bg-gray-300 shadow-sm rounded-md hover:bg-black hover:text-white px-4 py-1">Go to Home</button>
+            <button onClick={()=>{role==="user"?navigate("/"):navigate("/admin/works")}} className="mt-14 border bg-gray-300 shadow-sm rounded-md hover:bg-black hover:text-white px-4 py-1">{role==="user"?"Go to Home":"Back"}</button>
             </div>
         </div>
     </div>

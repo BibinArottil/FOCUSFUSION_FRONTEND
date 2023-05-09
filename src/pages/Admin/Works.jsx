@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import WorkDetails from "../../components/Admin/WorkDetails";
 import Table from "../../components/Ui/Table";
 import axios from "../../instance/axios";
 
 function Works() {
+  const navigate=useNavigate()
   const [work, setWork] = useState([]);
   const [modal,setModal] = useState(false)
   const [details,setDetails] = useState(null)
@@ -31,7 +33,7 @@ const handleView = (val)=>{
   setDetails(val)
 }
 
-console.log(details);
+// console.log(details);
 
   const columns = [
     {
@@ -98,6 +100,14 @@ console.log(details);
         <h1 className="text-3xl font-semibold">Works Management</h1>
       </div>
       <div className="mx-5">
+      <div className="mb-5">
+        <button
+          onClick={() => navigate("/admin/workHistory")}
+          className="bg-gray-500 text-white px-8 py-2 rounded"
+        >
+          Work History
+        </button>
+      </div>
       <Table columns={columns} data={data}/>
       </div>
       <WorkDetails visible={modal} onClose={handleOnClose} details={details}/>

@@ -3,13 +3,18 @@ import { useEffect } from 'react'
 import axios from "../../instance/axios"
 import { useSelector } from 'react-redux'
 import Table from '../../components/Ui/Table'
-import {MdOutlineRateReview} from "react-icons/md"
+import ReviewModal from '../../components/User/ReviewModal'
+import { useNavigate } from 'react-router-dom'
 
 export default function BookingHistory() {
+    const navigate = useNavigate()
     const [history,setHistory] = useState([])
     const [modal, setModal] = useState(false)
+    const [details, setdetails] = useState(null)
     const {userDetails} = useSelector((state)=>state.user)
     const id = userDetails._id
+    const handleOnClose = () => setModal(false);
+
     const fetchData = async()=>{
         await axios.get("/booking-history/"+id).then((res)=>{
             setHistory(res.data.data)
@@ -19,6 +24,10 @@ export default function BookingHistory() {
     useEffect(()=>{
         fetchData()
     },[])
+
+    const handleReview =(val)=>{
+      setdetails(val)
+    }
 
     const columns = [
         {
@@ -49,8 +58,8 @@ export default function BookingHistory() {
           cell: (row) => (
             <button
               onClick={() => {
-                // handleReview(row.val);
-                // setModal(true);
+                handleReview(row.val);
+                setModal(true);
               }}
               className="bg-cyan-500 sm:px-2 text-white sm:py-1 rounded"
             >
@@ -75,8 +84,17 @@ export default function BookingHistory() {
       });
 
   return (
-    <div className="mx-5 mt-20">
+    <div className="mx-20 mt-20">
+          <div className="mb-5">
+      <button
+        onClick={() => navigate("/bookings")}
+        className="bg-gray-500 text-white px-10 py-2 rounded"
+      >
+        Works
+      </button>
+    </div>
         <Table columns={columns} data={data} />
+        <ReviewModal visible={modal} onClose={handleOnClose} details={details}/>
     </div>
   )
 }

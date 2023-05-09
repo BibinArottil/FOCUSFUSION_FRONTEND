@@ -14,10 +14,11 @@ function BookAShoot() {
     const [value, setValue] = useState({
         company:"",
         location:"",
+        time:"",
         date:"",
         advance:""
     })
-// console.log("first")
+console.log(value)
    const fetchData= async()=>{
     await axios.get("/list").then((res)=>{
         setCompany(res.data)
@@ -28,14 +29,11 @@ function BookAShoot() {
         fetchData()
     },[])
 
-    const handlePaymentSuccess = async(e)=>{
+    const handleBooking = async(e)=>{
+      e.preventDefault()
       try {
         bookingValidationSchema.validate(value).then(async()=>{
-          if(value.advance>=1000){
-            await axios.post("/shoot-booking",{...value,userId}).then(()=>{
-              navigate('/paymentSuccess')
-          })
-          }else{
+          if(value.advance<=1000){
             toast.error("You should pay minimum 1000 above")
           }
         }).catch((validateError)=>{
@@ -46,11 +44,16 @@ function BookAShoot() {
         console.log(error);
       }
     }
-    // console.log(value);
+
+    const handlePaymentSuccess =async()=>{
+               await axios.post("/shoot-booking",{...value,userId}).then(()=>{
+              navigate('/paymentSuccess')
+          })
+    }
 
   return (
     <div className="w-100 h-96 rounded-lg mx-5 mt-14 sm:mt-32 bg-gray-300">
-        <form onSubmit={handlePaymentSuccess}>
+        <form onSubmit={handleBooking}>
       <div className="flex justify-around flex-wrap items-center pt-5 sm:mt-20 font-Lora text-lg">
         <div>
           <h1>Company Name</h1>
@@ -80,6 +83,17 @@ function BookAShoot() {
           />
         </div>
         <div>
+          <h1>Time</h1>
+          <input
+            onChange={(e) =>
+              setValue({ ...value, [e.target.name]: e.target.value })
+            }
+            className="rounded-lg text-gray-700 mt-2 px-4 sm:p-2 focus:bg-gray-200 focus:outline-none"
+            type="time"
+            name='time'
+          />
+        </div>
+        <div>
           <h1>Date</h1>
           <input
             onChange={(e) =>
@@ -103,7 +117,7 @@ function BookAShoot() {
         </div>
       </div>
       <div className="flex h-full relative justify-center sm:mt-14">
-      {value.advance>=1000 ? <PayPalScriptProvider options={{ "client-id":process.env.REACT_APP_CLIENT_ID}}>
+      {value.company!=='' && value.location!=='' && value.time!=='' && value.date!=='' && value.advance>=1000 ? <PayPalScriptProvider options={{ "client-id":"AZt9846IPXQJxVu7QBDlcAzLM1zM1LtY5SJahEuoXICFiLcRn3su71bcJIb0Ob8mObuOt6sL5bWHnt-n"}}>
                 <PayPalButtons
                   style={{
                     layout: 'vertical',
