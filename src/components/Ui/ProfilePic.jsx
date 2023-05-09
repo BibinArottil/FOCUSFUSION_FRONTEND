@@ -8,10 +8,12 @@ function Profile({ value, pic }) {
   const { userDetails } = useSelector((state) => state.user);
   const id = userDetails._id;
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState()
   const [loading, setLoading] = useState(false);
 
   const handleImage = (e) => {
     const file = e.target.files[0];
+    setPreview(URL.createObjectURL(file))
     const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/;
     if (!allowedExtensions.exec(file.name)) {
       toast.error("Format is not supported");
@@ -44,6 +46,7 @@ function Profile({ value, pic }) {
       <img
         className="bg-white w-28 mt-2 h-28 object-cover rounded-full"
         src={
+          preview?preview:
           value.image
             ? value.image
             : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"

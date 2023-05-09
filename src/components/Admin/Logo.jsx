@@ -8,10 +8,12 @@ export default function Logo({value,logo}) {
     const { photographerDetails } = useSelector((state) => state.photographer);
     const id = photographerDetails._id;
     const [image, setImage] = useState(null);
+    const [preview,setPreview]=useState()
     const [loading, setLoading] = useState(false);
   
     const handleImage = (e) => {
       const file = e.target.files[0];
+      setPreview(URL.createObjectURL(file))
       const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/;
       if (!allowedExtensions.exec(file.name)) {
         toast.error("Format is not supported");
@@ -43,6 +45,7 @@ export default function Logo({value,logo}) {
       <img
         className="bg-white w-28 mt-2 h-28 object-cover rounded-full"
         src={
+          preview?preview:
           value.logo
             ? value.logo
             : "https://st4.depositphotos.com/14953852/22772/v/1600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg"
