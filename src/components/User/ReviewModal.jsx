@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReactStars from "react-rating-stars-component"
 import axios from "../../instance/axios"
+import {toast} from "react-toastify"
 
 export default function ReviewModal({ visible,onClose,details}) {
 
@@ -23,7 +24,7 @@ export default function ReviewModal({ visible,onClose,details}) {
 
   const handleClick =async()=>{
     await axios.post("/review",{value,details}).then((res)=>{
-      console.log(res.data.message);
+      toast.success(res.data.message)
     })
   }
 

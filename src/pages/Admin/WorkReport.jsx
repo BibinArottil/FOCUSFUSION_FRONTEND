@@ -6,6 +6,7 @@ import ReactToPrint from "react-to-print";
 export default function SalesReport() {
   const componentRef = useRef();
   const [data, setData] = useState([]);
+  const [total,setTotal] = useState("")
   const [date, setDate] = useState({
     from: "",
     to: "",
