@@ -23,7 +23,7 @@ function AdminLogin() {
   }, []);
   return (
     <div>
-        {auth ?<Navigate to="/admin"/> : <Login /> }
+        {auth ?<Navigate to="/admin/dashboard"/> : <Login /> }
     </div>
   )
 }

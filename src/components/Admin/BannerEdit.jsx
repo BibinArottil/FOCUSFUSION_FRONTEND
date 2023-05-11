@@ -25,19 +25,19 @@ function BannerEdit({ visible, onClose, reload, data, id }) {
 
   const formData = new FormData();
   formData.append("photo", image);
-  formData.append("id",id);
+  formData.append("id", id);
 
   const handleClick = async () => {
     try {
-          await axios
-            .put("/admin/banner-edit", formData, config)
-            .then((res) => {
-              onClose();
-              reload();
-            })
-            .catch((err) => {
-              console.log(err.response.data.message);
-            });
+      await axios
+        .put("/admin/banner-edit", formData, config)
+        .then((res) => {
+          onClose();
+          reload();
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+        });
     } catch (error) {
       console.log(error);
     }

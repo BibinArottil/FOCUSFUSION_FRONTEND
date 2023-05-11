@@ -7,7 +7,7 @@ import {io} from "socket.io-client"
 function ChatModel({ visible, onClose, reload , nowChat, companyName}) {
   const nowChatId = nowChat._id
   const {userDetails} = useSelector((state)=>state.user)
-  const [chat, setChat] = useState(null)
+  const [chat, setChat] = useState(userDetails._id)
   const [arrivalMessage, setArrivalMessage] = useState(null)
   const [messages,setMessages] = useState([])
   const [newMessage,setNewMessage] = useState("")

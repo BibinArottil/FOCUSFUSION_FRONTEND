@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "../layout/AdminLayout";
 import AdminLogin from "../pages/Admin/AdminLogin";
+import Dashboard from "../pages/Admin/Dashboard";
 import PhotographersRequest from "../pages/Admin/PhotographersRequest";
 import InitialImages from "../pages/Admin/PhotographerImages";
 import PhotographersList from "../pages/Admin/PhotographersList";
@@ -19,6 +20,7 @@ function Admin() {
       <Route path="/login" element={<AdminLogin />} />
       <Route element={<Protect />}>
         <Route path="/" element={<Layout />}>
+          <Route path="/dashboard" element={<Dashboard />}/>
           <Route path="/photographers/request" element={<PhotographersRequest />}/>
           <Route path="/photographers/images" element={<InitialImages />} />
           <Route path="/photographers/list" element={<PhotographersList />} />

@@ -20,7 +20,7 @@ function Login() {
           ...values
         }).then((res)=>{
           localStorage.setItem('admin',res.data.token)
-          navigate('/admin')
+          navigate('/admin/dashboard')
         }).catch((err)=>{
       toast.error(`${err.response.data}`)
           console.log(err.response.data);

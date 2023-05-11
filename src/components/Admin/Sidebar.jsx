@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const AdminNavbar = () => {
   const navigate = useNavigate()
   const menus = [
-    // { name: "Dashboard", link: "/admin", icon: MdOutlineDashboard },
+    { name: "Dashboard", link: "/admin/dashboard", icon: MdOutlineDashboard },
     { name: "Photographers", link: "/admin/photographers/request", icon: MdAddAPhoto },
     { name: "Users", link: "/admin/users/list", icon: HiUsers },
     { name: "Banner", link: "/admin/banner", icon: FaTicketAlt },
