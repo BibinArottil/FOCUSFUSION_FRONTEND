@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
-import {TbReportSearch} from "react-icons/tb"
+import { TbReportSearch } from "react-icons/tb";
 import { MdAddAPhoto } from "react-icons/md";
 import { HiUsers } from "react-icons/hi";
 import { FaTicketAlt } from "react-icons/fa";
@@ -14,17 +14,20 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const AdminNavbar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const menus = [
     { name: "Dashboard", link: "/admin/dashboard", icon: MdOutlineDashboard },
-    { name: "Photographers", link: "/admin/photographers/request", icon: MdAddAPhoto },
+    {
+      name: "Photographers",
+      link: "/admin/photographers/request",
+      icon: MdAddAPhoto,
+    },
     { name: "Users", link: "/admin/users/list", icon: HiUsers },
     { name: "Banner", link: "/admin/banner", icon: FaTicketAlt },
     { name: "Category", link: "/admin/category", icon: BiCategory },
     // { name: "Review", link: "", icon: MdReviews },
     { name: "Works", link: "/admin/works", icon: BsPersonWorkspace },
     { name: "Sales", link: "/admin/sales", icon: TbReportSearch },
-    // { name: "Logout", link: "/admin/logout", icon: BiLogOut },
   ];
 
   const [open, setOpen] = useState(true);
@@ -37,16 +40,15 @@ const AdminNavbar = () => {
         setOpen(true);
       }
     }
-    handleResize()
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const logout =()=>{
-    console.log("logout");
-    localStorage.removeItem("admin")
-    navigate('/admin/login')
-  }
+  const logout = () => {
+    localStorage.removeItem("admin");
+    navigate("/admin/login");
+  };
 
   return (
     <section className="flex">
@@ -93,8 +95,21 @@ const AdminNavbar = () => {
           ))}
         </div>
 
-        {open ? <button onClick={()=>logout()} className="items-center text-red-600 gap-3.5 mt-4 font-semibold p-2" >Logout</button> :<button onClick={()=>logout()}  className="text-2xl text-red-600 mt-4"><BiLogOut/></button> }
-      
+        {open ? (
+          <button
+            onClick={() => logout()}
+            className="items-center text-red-600 gap-3.5 mt-4 font-semibold p-2"
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            onClick={() => logout()}
+            className="text-2xl text-red-600 mt-4"
+          >
+            <BiLogOut />
+          </button>
+        )}
       </div>
     </section>
   );

@@ -78,7 +78,10 @@ export default function WorkDetails({ visible, onClose, details }) {
         <div className="text-center mt-5 mx-14">
           {details.success ? (
             <PayPalScriptProvider
-              options={{ "client-id":"AZt9846IPXQJxVu7QBDlcAzLM1zM1LtY5SJahEuoXICFiLcRn3su71bcJIb0Ob8mObuOt6sL5bWHnt-n" }}
+              options={{
+                "client-id":
+                  "AZt9846IPXQJxVu7QBDlcAzLM1zM1LtY5SJahEuoXICFiLcRn3su71bcJIb0Ob8mObuOt6sL5bWHnt-n",
+              }}
             >
               <PayPalButtons
                 style={{

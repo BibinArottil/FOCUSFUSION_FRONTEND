@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import axios from "../../instance/axios";
 import DataTable from "react-data-table-component";
 import AddModal from "./CategoryAdd";
@@ -47,7 +46,7 @@ function Category() {
     {
       name: "Name",
       selector: (row) => row.name,
-      sortable:true
+      sortable: true,
     },
     {
       name: null,

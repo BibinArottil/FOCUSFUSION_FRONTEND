@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link,Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "../../instance/axios";
 import DataTable from "react-data-table-component";
 import FilterComponent from "../Ui/FilterComponent";
@@ -9,30 +9,37 @@ function PhotographersListing() {
   const [filterText, setFilterText] = useState("");
 
   const token = localStorage.getItem("admin");
-  
+
   const fetchData = async () => {
-    await axios.get("/admin/list",{
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      setData(res.data.list);
-    });
+    await axios
+      .get("/admin/list", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        setData(res.data.list);
+      });
   };
 
   useEffect(() => {
     fetchData();
-  },[]);
+  }, []);
 
   const handleList = async (id) => {
     try {
-      await axios.post("/admin/photographer-block", { id,       headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },}).then((res) => {
-        if (res.data.success) fetchData();
-      });
+      await axios
+        .post("/admin/photographer-block", {
+          id,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.data.success) fetchData();
+        });
     } catch (error) {
       console.log(error);
     }
@@ -42,17 +49,17 @@ function PhotographersListing() {
     {
       name: "NO:",
       selector: (row) => row.no,
-      sortable:true
+      sortable: true,
     },
     {
       name: "Company Name",
       selector: (row) => row.company,
-      sortable:true
+      sortable: true,
     },
     {
       name: "Name",
       selector: (row) => row.name,
-      sortable:true
+      sortable: true,
     },
     {
       name: "Email",
@@ -109,27 +116,31 @@ function PhotographersListing() {
     };
   });
 
-  return !token ? <Navigate to="/admin/login" /> : (
+  return !token ? (
+    <Navigate to="/admin/login" />
+  ) : (
     <div className="h-full w-full">
       <div className="flex flex-col px-20 py-5">
         <h1 className="text-3xl font-semibold">Photographers List</h1>
-          <button className="self-start my-5 bg-slate-400 w-32 h-10 shadow-slate-800 shadow-sm rounded-full">
-        <Link to="/admin/photographers/request">
-            Requests
-        </Link>
-          </button>
+        <button className="self-start my-5 bg-slate-400 w-32 h-10 shadow-slate-800 shadow-sm rounded-full">
+          <Link to="/admin/photographers/request">Requests</Link>
+        </button>
       </div>
       <div className="sm:w-full px-10">
-      <FilterComponent
+        <FilterComponent
           onFilter={(e) => setFilterText(e.target.value)}
           filterText={filterText}
         />
-        <DataTable columns={columns} data={tableData.filter(
+        <DataTable
+          columns={columns}
+          data={tableData.filter(
             (item) =>
               item.name &&
               item.name.toLowerCase().includes(filterText.toLowerCase())
           )}
-         customStyles={style} pagination/>
+          customStyles={style}
+          pagination
+        />
       </div>
     </div>
   );
