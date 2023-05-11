@@ -13,7 +13,6 @@ function Login({role}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [select, setSelect] = useState("user");
-  // const [tab, setTab] = useState("user")
   const [check, setCheck] = useState(userLoginValidation);
   const [visible, setVisible] = useState(false);
   const [type, setType] = useState("password");
