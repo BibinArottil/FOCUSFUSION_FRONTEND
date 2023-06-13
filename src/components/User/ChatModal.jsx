@@ -17,7 +17,8 @@ function ChatModel({ visible, onClose, reload , nowChat, companyName}) {
   inputRef.current?.focus()
 
     useEffect(()=>{
-      socket.current = io("https://focusfusion-api.bibin.tech")
+      socket.current = io("https://focusfusion-api.bibin.tech/api")
+      // socket.current = io("http://localhost:8000")
       socket.current.on("getMessage",data=>{
         setArrivalMessage({
           sender:data.senderId,
