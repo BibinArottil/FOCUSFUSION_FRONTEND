@@ -17,7 +17,7 @@ function Chat() {
   const scrollRef = useRef()
 
   useEffect(()=>{
-    socket.current = io("https://focusfusion-api.bibin.tech/api")
+    socket.current = io("https://focusfusion-api.bibin.tech")
     // socket.current = io("http://localhost:8000")
     socket.current.on("getMessage",data=>{
       setArrivalMessage({

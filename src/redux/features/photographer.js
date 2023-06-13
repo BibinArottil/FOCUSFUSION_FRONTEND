@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit"
 export const photographerSlice = createSlice({
     name:"photographer",
     initialState:{
-        photographerDetails:{}
+        photographerDetails:""
     },
     reducers:{
         setDetails:(state,action) =>{
